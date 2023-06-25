@@ -82,12 +82,12 @@ def process_pull_requests():
                 if pr['state'] == 'open':
                     opened_prs.append(pr)
                     open_pull_request_info = "\n".join([f"Title: {pr['title']}\nURL: {pr['html_url']}\n"])
-                    logger.info("open_pull_request_info \n", open_pull_request_info)
+                    logger.info("open_pull_request_info %s \n" %(open_pull_request_info))
                     opned_pr_info_ls.append(open_pull_request_info)
                 elif pr['state'] == 'closed':
                     closed_prs.append(pr)
                     closed_pull_request_info = "\n".join([f"Title: {pr['title']}\nURL: {pr['html_url']}\n"])
-                    logger.info("closed_pull_request_info \n", closed_pull_request_info)
+                    logger.info("closed_pull_request_info %s \n" %(closed_pull_request_info))
                     closed_pr_info_ls.append(closed_pull_request_info)
                 
         
@@ -217,12 +217,9 @@ def send_email(subject, body, opened_prs, workbook_name):
             logger.info ("Error: unable to send email %s", e)
 
 
-#testing    
-# process_pull_requests()
-
 
 # Run the script at regular intervals
-interval = 15  # <seconds>
+interval = 15  # 1 hour
 while True:
     process_pull_requests()
     time.sleep(interval)
